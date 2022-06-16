@@ -1,0 +1,35 @@
+server:
+  port: 10060
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/farm
+    username: root
+    password: 123456
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    properties:
+      hibernate:
+        format_sql: true
+  redis:
+    database: 4
+    host: localhost
+    port: 6379
+    connect-timeout: 2000
+logging:
+  file:
+    path: /log
+  level:
+    org.hibernate.SQL:
+      DEBUG
+erupt:
+  redis-session: true
+erupt-app:
+  verify-code-count: 2
+magic-api:
+  web: /magic/web
+  resource:
+    location: /data/magic-api/

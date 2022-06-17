@@ -1,15 +1,14 @@
 package com.ssssheep.farm.entity;
 
+import com.ssssheep.farm.proxy.IncomeExpenditureProxy;
 import lombok.*;
 import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.EruptField;
+import xyz.erupt.annotation.sub_erupt.Power;
 import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
-import xyz.erupt.annotation.sub_field.sub_edit.DateType;
-import xyz.erupt.annotation.sub_field.sub_edit.NumberType;
-import xyz.erupt.annotation.sub_field.sub_edit.ReferenceTreeType;
-import xyz.erupt.annotation.sub_field.sub_edit.Search;
+import xyz.erupt.annotation.sub_field.sub_edit.*;
 import xyz.erupt.jpa.model.BaseModel;
 
 import javax.persistence.Entity;
@@ -29,58 +28,102 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-@Erupt(name = "收支信息")
+@Erupt(name = "收支信息", dataProxy = IncomeExpenditureProxy.class, power = @Power(export = true, importable = true))
 @Table(name = "t_income_expenditures")
 @Entity
 public class IncomeExpenditure extends BaseModel {
 
     @EruptField(
             views = @View(
-                    title = "去年家庭总收入", sortable = true
+                    title = "年份", sortable = true
+            ),
+            edit = @Edit(
+                    title = "年份",
+                    type = EditType.DATE, search = @Search, notNull = true,
+                    dateType = @DateType(type = DateType.Type.YEAR)
+            )
+    )
+    private String fYear;
+
+    @EruptField(
+            views = @View(
+                    title = "去年家庭总收入"
             ),
             edit = @Edit(
                     title = "去年家庭总收入",
-                    type = EditType.NUMBER, search = @Search, notNull = true,
-                    numberType = @NumberType
+                    type = EditType.INPUT, search = @Search,
+                    inputType = @InputType(
+                            type = "number",
+                            suffix = {
+                                    @VL(value = "元", label = "元"),
+                                    @VL(value = "千", label = "千"),
+                                    @VL(value = "万", label = "万"),
+                                    @VL(value = "十万", label = "十万")
+                            }
+                    )
             )
     )
-    private Integer lastYearIncome;
+    private String lastYearIncome;
 
     @EruptField(
             views = @View(
-                    title = "去年人均纯收入", sortable = true
+                    title = "去年人均纯收入"
             ),
             edit = @Edit(
                     title = "去年人均纯收入",
-                    type = EditType.NUMBER, search = @Search, notNull = true,
-                    numberType = @NumberType
+                    type = EditType.INPUT, search = @Search,
+                    inputType = @InputType(
+                            type = "number",
+                            suffix = {
+                                    @VL(value = "元", label = "元"),
+                                    @VL(value = "千", label = "千"),
+                                    @VL(value = "万", label = "万"),
+                                    @VL(value = "十万", label = "十万")
+                            }
+                    )
             )
     )
-    private Integer lastYearAvgIncome;
+    private String lastYearAvgIncome;
 
     @EruptField(
             views = @View(
-                    title = "去年生产支出", sortable = true
+                    title = "去年生产支出"
             ),
             edit = @Edit(
                     title = "去年生产支出",
-                    type = EditType.NUMBER, search = @Search, notNull = true,
-                    numberType = @NumberType
+                    type = EditType.INPUT, search = @Search,
+                    inputType = @InputType(
+                            type = "number",
+                            suffix = {
+                                    @VL(value = "元", label = "元"),
+                                    @VL(value = "千", label = "千"),
+                                    @VL(value = "万", label = "万"),
+                                    @VL(value = "十万", label = "十万")
+                            }
+                    )
             )
     )
-    private Integer lastYearExpenditure;
+    private String lastYearExpenditure;
 
     @EruptField(
             views = @View(
-                    title = "去年住院医疗支出", sortable = true
+                    title = "去年住院医疗支出"
             ),
             edit = @Edit(
                     title = "去年住院医疗支出",
-                    type = EditType.NUMBER, search = @Search, notNull = true,
-                    numberType = @NumberType
+                    type = EditType.INPUT, search = @Search,
+                    inputType = @InputType(
+                            type = "number",
+                            suffix = {
+                                    @VL(value = "元", label = "元"),
+                                    @VL(value = "千", label = "千"),
+                                    @VL(value = "万", label = "万"),
+                                    @VL(value = "十万", label = "十万")
+                            }
+                    )
             )
     )
-    private Integer lastYearHospitalExpenditure;
+    private String lastYearHospitalExpenditure;
 
     @EruptField(
             views = @View(
@@ -90,7 +133,7 @@ public class IncomeExpenditure extends BaseModel {
             edit = @Edit(
                     title = "所属户籍",
                     type = EditType.REFERENCE_TREE, search = @Search, notNull = true,
-                    referenceTreeType = @ReferenceTreeType(id = "id", label = "name")
+                    referenceTableType = @ReferenceTableType(id = "id", label = "name")
             )
     )
     @ManyToOne

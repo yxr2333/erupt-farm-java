@@ -10,6 +10,7 @@ import javax.persistence.*;
 
 import lombok.*;
 import xyz.erupt.annotation.*;
+import xyz.erupt.annotation.sub_erupt.Power;
 import xyz.erupt.annotation.sub_field.*;
 import xyz.erupt.annotation.sub_field.sub_edit.*;
 import xyz.erupt.jpa.model.BaseModel;
@@ -24,7 +25,13 @@ import java.util.Date;
  * @date 2022/6/16 15:18 星期四
  */
 
-@Erupt(name = "农户人员信息",dataProxy = IMemberProxy.class)
+@Erupt(
+        name = "农户人员信息",
+        dataProxy = IMemberProxy.class,
+        power = @Power(
+                export = true,
+                importable = true)
+)
 @Table(name = "t_members")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -36,6 +43,7 @@ public class IMember extends BaseModel {
 
     @EruptField(
             views = @View(
+                    export = true,
                     title = "成员名称"
             ),
             edit = @Edit(
@@ -232,10 +240,11 @@ public class IMember extends BaseModel {
                             expr = "value === true"
                     ),
                     title = "是否办理残疾证",
-                    type = EditType.EMPTY, search = @Search
+                    boolType = @BoolType(trueText = "是", falseText = "否"),
+                    search = @Search
             )
     )
-    private String disabilityCeritificate;
+    private Boolean disabilityCeritificate;
 
     @EruptField(
             views = @View(

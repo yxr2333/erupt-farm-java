@@ -1,17 +1,21 @@
 package com.ssssheep.farm.entity;
 
-import javax.persistence.*;
-
 import com.ssssheep.farm.proxy.QuestionnaireProxy;
 import lombok.*;
-import xyz.erupt.annotation.*;
-import xyz.erupt.annotation.sub_erupt.*;
-import xyz.erupt.annotation.sub_field.*;
-import xyz.erupt.annotation.sub_field.sub_edit.*;
-import xyz.erupt.upms.model.base.HyperModel;
+import xyz.erupt.annotation.Erupt;
+import xyz.erupt.annotation.EruptField;
+import xyz.erupt.annotation.sub_erupt.Power;
+import xyz.erupt.annotation.sub_field.Edit;
+import xyz.erupt.annotation.sub_field.EditType;
+import xyz.erupt.annotation.sub_field.View;
+import xyz.erupt.annotation.sub_field.sub_edit.BoolType;
+import xyz.erupt.annotation.sub_field.sub_edit.InputType;
+import xyz.erupt.annotation.sub_field.sub_edit.Search;
+import xyz.erupt.annotation.sub_field.sub_edit.ShowBy;
 import xyz.erupt.jpa.model.BaseModel;
 
-import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
 
 /**

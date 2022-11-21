@@ -1,20 +1,19 @@
 package com.ssssheep.farm.entity;
 
 import com.ssssheep.farm.proxy.IMemberProxy;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import xyz.erupt.annotation.Erupt;
-
-import javax.persistence.*;
-
 import lombok.*;
-import xyz.erupt.annotation.*;
+import xyz.erupt.annotation.Erupt;
+import xyz.erupt.annotation.EruptField;
 import xyz.erupt.annotation.sub_erupt.Power;
-import xyz.erupt.annotation.sub_field.*;
+import xyz.erupt.annotation.sub_field.Edit;
+import xyz.erupt.annotation.sub_field.EditType;
+import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.*;
 import xyz.erupt.jpa.model.BaseModel;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.util.Date;
 
 /**
@@ -203,7 +202,7 @@ public class IMember extends BaseModel {
             ),
             edit = @Edit(
                     title = "是否残疾",
-                    boolType = @BoolType(),
+                    boolType = @BoolType(trueText = "是",falseText = "否"),
                     search = @Search, notNull = true
             )
     )
